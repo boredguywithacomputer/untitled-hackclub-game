@@ -1,2 +1,2 @@
 # untitled-hackclub-game
-uieigqegukjhgfghjkhgfhfhuqeghq
+:3 :3 :3
