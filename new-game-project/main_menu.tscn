@@ -5,13 +5,15 @@
 [ext_resource type="FontFile" uid="uid://btl5vdvf3uo7q" path="res://Icecold.ttf" id="2_fu7sn"]
 [ext_resource type="AudioStream" uid="uid://dy8orvv3palet" path="res://ice music.mp3" id="4_jix8l"]
 [ext_resource type="Script" uid="uid://e6kxrqyhudv0" path="res://audio_control.gd" id="5_glbon"]
+[ext_resource type="Script" uid="uid://bk6n7rai2x2mt" path="res://fullscreen_control.gd" id="6_nlkkf"]
+[ext_resource type="Script" uid="uid://ki0vsy4xd7dd" path="res://scale_control.gd" id="7_qe12f"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dir7o"]
 texture = ExtResource("1_7vrkn")
 modulate_color = Color(0.49354547, 0.49354553, 0.49354553, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3moom"]
-bg_color = Color(0.65097684, 0.59728926, 0.97401255, 1)
+bg_color = Color(0.46294677, 0.6682641, 0.9369687, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -20,7 +22,7 @@ shadow_size = 5
 shadow_offset = Vector2(0, 3.14)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
-bg_color = Color(0.35768154, 0.20741391, 0.7359915, 1)
+bg_color = Color(0.21251288, 0.6141399, 0.71187633, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -103,20 +105,19 @@ text = "Settings"
 
 [node name="Label" type="Label" parent="." unique_id=1659319254]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -341.0
-offset_top = -302.0
-offset_right = 349.0
-offset_bottom = -218.0
+offset_left = -324.5
+offset_top = 22.0
+offset_right = 324.5
+offset_bottom = 106.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_color = Color(0.81750876, 0.8778167, 0.9790247, 1)
+theme_override_colors/font_shadow_color = Color(0.00043097007, 0.0007649082, 0.00091932196, 1)
 theme_override_fonts/font = ExtResource("2_fu7sn")
 theme_override_font_sizes/font_size = 83
-text = "GoDot Funsies"
+text = "The Ice house"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=100664171]
 stream = ExtResource("4_jix8l")
@@ -124,6 +125,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="Options" type="Panel" parent="." unique_id=1181583980]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -139,9 +141,11 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Options" unique_id=366731563]
 layout_mode = 0
-offset_right = 933.5
-offset_bottom = 40.25
-theme_override_font_sizes/font_size = 26
+offset_left = -11.0
+offset_top = 5.0
+offset_right = 922.5
+offset_bottom = 45.25
+theme_override_font_sizes/font_size = 37
 text = "Options"
 horizontal_alignment = 1
 
@@ -159,28 +163,77 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_3moom")
 theme_override_styles/hover = SubResource("StyleBoxFlat_7vrkn")
 text = "Exit"
 
-[node name="AudioControl" type="HSlider" parent="Options" unique_id=172863774]
+[node name="VBoxContainer" type="VBoxContainer" parent="Options" unique_id=80866949]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.18300001
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.18300001
-offset_left = -201.5
-offset_top = -17.441505
-offset_right = 198.5
-offset_bottom = 19.558495
+anchor_bottom = 0.5
+offset_left = -255.0
+offset_top = -111.0
+offset_right = 255.0
+offset_bottom = 6.75
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 55
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options/VBoxContainer" unique_id=1399096144]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/HBoxContainer" unique_id=1615759099]
+layout_mode = 2
+text = "Music volume"
+
+[node name="AudioControl" type="HSlider" parent="Options/VBoxContainer/HBoxContainer" unique_id=172863774]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/slider = SubResource("StyleBoxLine_3moom")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_dir7o")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dir7o")
-value = 50.0
+max_value = 1.0
+step = 0.05
+value = 1.0
 script = ExtResource("5_glbon")
 audio_bus_name = "Music"
+
+[node name="Fullscreen Control" type="CheckButton" parent="Options/VBoxContainer" unique_id=785475862]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Fullscreen Controls"
+script = ExtResource("6_nlkkf")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Options/VBoxContainer" unique_id=1279597325]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Options/VBoxContainer/HBoxContainer2" unique_id=510668583]
+layout_mode = 2
+text = "2D Scaling"
+
+[node name="Scale Control" type="OptionButton" parent="Options/VBoxContainer/HBoxContainer2" unique_id=1058571354]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+selected = 0
+item_count = 4
+popup/item_0/text = "100%"
+popup/item_0/id = 0
+popup/item_1/text = "75%"
+popup/item_1/id = 1
+popup/item_2/text = "25%"
+popup/item_2/id = 2
+popup/item_3/text = "25%"
+popup/item_3/id = 3
+script = ExtResource("7_qe12f")
 
 [connection signal="pressed" from="MainButtons/Button" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainButtons/Button2" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MainButtons/Button3" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Options/back" to="." method="_on_back_options_pressed"]
-[connection signal="value_changed" from="Options/AudioControl" to="Options/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer/AudioControl" to="Options/VBoxContainer/HBoxContainer/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="Options/VBoxContainer/Fullscreen Control" to="." method="_on_fullscreen_control_toggled"]
+[connection signal="toggled" from="Options/VBoxContainer/Fullscreen Control" to="Options/VBoxContainer/Fullscreen Control" method="_on_toggled"]
+[connection signal="item_selected" from="Options/VBoxContainer/HBoxContainer2/Scale Control" to="Options/VBoxContainer/HBoxContainer2/Scale Control" method="_on_item_selected"]
