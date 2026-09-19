@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dn1f4y7qb2wpj"]
+
+[ext_resource type="Script" uid="uid://dhec12fkkwo" path="res://tracker.gd" id="1_qh22o"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hbih1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjt7s"]
+
+[node name="monitor" type="CharacterBody3D" unique_id=1121237014]
+script = ExtResource("1_qh22o")
+playerPath = null
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1702127264]
+mesh = SubResource("CapsuleMesh_hbih1")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=113576525]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=835984009]
+shape = SubResource("CapsuleShape3D_cjt7s")

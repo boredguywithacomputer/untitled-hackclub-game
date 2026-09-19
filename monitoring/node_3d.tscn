@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://lp0smlhoqe3p"]
+
+[ext_resource type="Script" uid="uid://dejb6bxwdblgf" path="res://character_body_3d.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://qcorh6p4dxxh" path="res://camera_3d.gd" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://dn1f4y7qb2wpj" path="res://monitor.tscn" id="3_a0tk4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4xowi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lgns8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lgns8"]
+
+[sub_resource type="Environment" id="Environment_lgns8"]
+background_mode = 2
+ambient_light_color = Color(0.6074128, 0.6693338, 0.57605195, 1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_e2dur"]
+vertices = PackedVector3Array(-14, 0.5, -14, -14, 0.5, 14, 14, 0.5, 14, 14, 0.5, -14)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 0
+agent_radius = 1.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lgns8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5hio4"]
+size = Vector3(30, 0.1, 30)
+
+[node name="Node3D" type="Node3D" unique_id=1729448010]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1375248625]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+script = ExtResource("1_a202f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=522990499]
+shape = SubResource("CylinderShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=705312166]
+mesh = SubResource("CapsuleMesh_lgns8")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/MeshInstance3D" unique_id=1055353255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_noarx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="CharacterBody3D" unique_id=309012466]
+shape = SubResource("CylinderShape3D_lgns8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1218125405]
+environment = SubResource("Environment_lgns8")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1307480614]
+navigation_mesh = SubResource("NavigationMesh_e2dur")
+
+[node name="monitor" parent="NavigationRegion3D" unique_id=1121237014 instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2930145, 10.884628)
+playerPath = NodePath("../../CharacterBody3D")
+
+[node name="Floor" type="RigidBody3D" parent="NavigationRegion3D" unique_id=909522897]
+physics_material_override = SubResource("PhysicsMaterial_4xowi")
+gravity_scale = 0.0
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=2081888588]
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
+mesh = SubResource("PlaneMesh_lgns8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Floor" unique_id=23816970]
+shape = SubResource("BoxShape3D_5hio4")
