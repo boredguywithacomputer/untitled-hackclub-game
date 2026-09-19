@@ -8,7 +8,7 @@ func _ready() -> void:
 	Events.interaction.connect(_check_for_pickups)
 	
 func _process(delta: float) -> void:
-	pass
+	_update_inventory_ui()
 
 func _update_inventory_ui():
 	var inv = "";
@@ -20,9 +20,12 @@ func _update_inventory_ui():
 func _check_for_pickups(object: Node, triggerevent: String) -> void:
 	if triggerevent.begins_with("Grab_"):
 		var objectname = triggerevent.split("Grab_")[1];
-		#object.queue_free()
+		
+		if objectname != "Fish":
+			object.queue_free()
+			
 		if inventory.has(objectname):
 			inventory[objectname].count += 1
 		else:
 			inventory[objectname] = { "count": 1 }
-	_update_inventory_ui()
+	#_update_inventory_ui()
