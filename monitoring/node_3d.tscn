@@ -77,7 +77,10 @@ transform = Transform3D(-0.0612122, 0, 0.9981248, 0, 1, 0, -0.9981248, 0, -0.061
 transform = Transform3D(-0.99250615, 0, -0.12219483, 0, 1, 0, 0.12219483, 0, -0.99250615, -8.616665, 1.0030463, 1.9321508)
 
 [node name="StaticBody3D4" parent="NavigationRegion3D" unique_id=622208149 instance=ExtResource("3_r3fl7")]
-transform = Transform3D(0.18271923, 0, -0.9831657, 0, 1, 0, 0.9831657, 0, 0.18271923, 2.9597616, 0.5809734, -6.110461)
+transform = Transform3D(0.012640893, 0, -0.9999206, 0, 1, 0, 0.9999206, 0, 0.012640893, 2.9597616, 0.5809734, -6.67572e-05)
+
+[node name="StaticBody3D4" parent="NavigationRegion3D/StaticBody3D4" unique_id=1860865813 instance=ExtResource("3_r3fl7")]
+transform = Transform3D(0.9995978, 0, -0.028371643, 0, 1, 0, 0.028371643, 0, 0.9995978, -1.9819796, 0.5809734, -0.12162471)
 
 [node name="StaticBody3D5" parent="NavigationRegion3D" unique_id=341270049 instance=ExtResource("3_r3fl7")]
-transform = Transform3D(0.588132, 0, 0.80876493, 0, 1, 0, -0.80876493, 0, 0.588132, -9.42438, 0.9619508, -9.309738)
+transform = Transform3D(0.9995228, 0, -0.030889153, 0, 1, 0, 0.030889153, 0, 0.9995228, 2.1098452, 0.9619508, -2.7874055)

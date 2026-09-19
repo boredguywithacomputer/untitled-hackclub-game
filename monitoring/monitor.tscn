@@ -6,8 +6,16 @@
 albedo_color = Color(0.77269953, 0.5704434, 0.58679634, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hbih1"]
+radius = 0.45
+height = 1.9
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjt7s"]
+radius = 0.55
+height = 2.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hbih1"]
+radius = 0.45
+height = 1.9
 
 [node name="monitor" type="CharacterBody3D" unique_id=1121237014]
 script = ExtResource("1_qh22o")
@@ -22,5 +30,8 @@ mesh = SubResource("CapsuleMesh_hbih1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=835984009]
 shape = SubResource("CapsuleShape3D_cjt7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1526888193]
+shape = SubResource("CapsuleShape3D_hbih1")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
