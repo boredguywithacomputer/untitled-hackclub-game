@@ -2,18 +2,25 @@
 
 [ext_resource type="Script" uid="uid://dhec12fkkwo" path="res://tracker.gd" id="1_qh22o"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cpln"]
+albedo_color = Color(0.77269953, 0.5704434, 0.58679634, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hbih1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjt7s"]
 
 [node name="monitor" type="CharacterBody3D" unique_id=1121237014]
 script = ExtResource("1_qh22o")
-playerPath = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1702127264]
+material_override = SubResource("StandardMaterial3D_5cpln")
 mesh = SubResource("CapsuleMesh_hbih1")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=113576525]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=835984009]
+[node name="Area3D" type="Area3D" parent="." unique_id=1931289215]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=835984009]
 shape = SubResource("CapsuleShape3D_cjt7s")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
