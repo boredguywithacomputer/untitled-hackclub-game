@@ -63,8 +63,8 @@ environment = SubResource("Environment_lgns8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 3)
 mass = 300.0
 script = ExtResource("3_a0tk4")
-promptName = "Grab"
-triggeredEvent = "Grab"
+promptName = "Take Fishy"
+triggeredEvent = "Grab_Fish"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LootLlama" unique_id=768772424]
 mesh = SubResource("BoxMesh_lgns8")
@@ -116,3 +116,10 @@ offset_bottom = 211.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "E - INTERACT"
+
+[node name="Inventory" type="Label" parent="CanvasLayer" unique_id=515821359]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+vertical_alignment = 2

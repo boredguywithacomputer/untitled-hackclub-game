@@ -20,8 +20,7 @@ func _undisplayprompt(object: Node) -> void:
 		topobject = null
 		toptriggerevent = null
 		topprompt = ""
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+		
 func _process(delta: float) -> void:
 	$InteractPrompt.text = "E | " + topprompt
 	
