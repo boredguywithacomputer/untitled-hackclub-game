@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dihye41cwi33e"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_5hio4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgns8"]
+material = SubResource("ORMMaterial3D_5hio4")
+size = Vector3(15, 0.2, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(15, 0.2, 15)
+
+[node name="Node3D" type="Node3D" unique_id=2095359140]
+
+[node name="Tile" type="RigidBody3D" parent="." unique_id=1680791043]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile" unique_id=2001207894]
+mesh = SubResource("BoxMesh_lgns8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile" unique_id=1893774093]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="Marker3D" type="Marker3D" parent="Tile" unique_id=1100936476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+gizmo_extents = 3.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Tile/Marker3D" unique_id=790477614]
+
+[node name="Marker3D2" type="Marker3D" parent="Tile" unique_id=83213690]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 15)
+gizmo_extents = 3.0
+
+[node name="Marker3D4" type="Marker3D" parent="Tile" unique_id=1004017948]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -15)
+gizmo_extents = 3.0
+
+[node name="Marker3D3" type="Marker3D" parent="Tile" unique_id=1949428408]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -15, 0, 0)
+gizmo_extents = 3.0

@@ -15,6 +15,3 @@ func _proximity_trigger(body: Node3D) -> void:
 func _deproximity_trigger(body: Node3D) -> void:
 	if !body.name == "Player": return
 	Events.unprompt.emit(self)
-
-func _process(delta: float) -> void:
-	pass

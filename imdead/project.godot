@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Events="*uid://sb7e35qjomb2"
 Inventory="*uid://clgl686yu6gp2"
+Map="*uid://b2sgipi6joemk"
 
 [display]
 

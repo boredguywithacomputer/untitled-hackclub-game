@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://d0lyf43p086ct"]
+
+[ext_resource type="Script" uid="uid://bmnwym5t4enom" path="res://loot_llama.gd" id="1_g6cbk"]
+[ext_resource type="PackedScene" uid="uid://b28v3y1vfv11o" path="res://models/gas.glb" id="2_v8qhu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgns8"]
+material = SubResource("StandardMaterial3D_i5arm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(1, 1, 0.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5hio4"]
+
+[node name="Fuel" type="RigidBody3D" unique_id=406247188]
+mass = 300.0
+script = ExtResource("1_g6cbk")
+promptName = "Refuel"
+triggeredEvent = "Grab_Fuel"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=456603121]
+visible = false
+mesh = SubResource("BoxMesh_lgns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=251578421]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=2033527901]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=2118433558]
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="gas" parent="." unique_id=794692449 instance=ExtResource("2_v8qhu")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
