@@ -15,8 +15,9 @@ func _process(_delta: float) -> void:
  
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("caramel"):
-		print("pressed")
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		get_tree().root.add_child(globalvars.shields)
-		globalvars.mainparent = globalvars.maingame.get_parent()
-		globalvars.mainparent.remove_child.call_deferred(globalvars.maingame)
+		if globalvars.switch1state == "on":
+			print("pressed")
+			globalvars.container.add_child(globalvars.shields)
+			globalvars.maingame.visible = false
+			globalvars.maingame.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var player = null
 
-const speed = 2.5
+const speed = 3.5
 @export var playerPath: NodePath
 @onready var navAgent = $NavigationAgent3D
 
