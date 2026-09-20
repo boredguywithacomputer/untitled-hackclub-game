@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c4tbrgb7gbnbc"]
+
+[ext_resource type="Script" uid="uid://bbc8mr76rf3qo" path="res://switcher.gd" id="1_xot4b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjt7s"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_isbrc"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbih1"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" unique_id=866187435]
+mesh = SubResource("BoxMesh_cjt7s")
+script = ExtResource("1_xot4b")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1829125459]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1807959764]
+shape = SubResource("ConcavePolygonShape3D_isbrc")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1747609156]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1889959439]
+shape = SubResource("BoxShape3D_hbih1")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

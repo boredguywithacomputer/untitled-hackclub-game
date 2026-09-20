@@ -1,64 +1,64 @@
 [gd_scene format=3 uid="uid://dfigqyp8m234g"]
 
-[ext_resource type="Texture2D" uid="uid://c8f2736ixbw82" path="res://icon.svg" id="1_0e48y"]
-[ext_resource type="Script" uid="uid://c8o36xxy2t5gi" path="res://shields.gd" id="1_rj586"]
-[ext_resource type="Script" uid="uid://dg131ua80m128" path="res://button.gd" id="2_epypp"]
-[ext_resource type="Script" uid="uid://b44wialk4lu0n" path="res://button_2.gd" id="3_0hol4"]
-[ext_resource type="Script" uid="uid://bkg5h0do0j1d4" path="res://button_3.gd" id="4_q6r6c"]
-[ext_resource type="Script" uid="uid://c6pkp882hogka" path="res://button_4.gd" id="5_d21ai"]
-[ext_resource type="Script" uid="uid://d1i32vrt6j5so" path="res://button_5.gd" id="6_rj586"]
-[ext_resource type="Script" uid="uid://drwsa5kwu1lw0" path="res://button_6.gd" id="7_4d7sh"]
+[ext_resource type="Script" uid="uid://c8o36xxy2t5gi" path="res://shields.gd" id="1_wt7s3"]
+[ext_resource type="Texture2D" uid="uid://c8f2736ixbw82" path="res://icon.svg" id="2_7dx7h"]
+[ext_resource type="Script" uid="uid://dg131ua80m128" path="res://button.gd" id="3_mfmaq"]
+[ext_resource type="Script" uid="uid://b44wialk4lu0n" path="res://button_2.gd" id="4_bhac6"]
+[ext_resource type="Script" uid="uid://bkg5h0do0j1d4" path="res://button_3.gd" id="5_nnl4f"]
+[ext_resource type="Script" uid="uid://c6pkp882hogka" path="res://button_4.gd" id="6_cu33v"]
+[ext_resource type="Script" uid="uid://d1i32vrt6j5so" path="res://button_5.gd" id="7_li3oj"]
+[ext_resource type="Script" uid="uid://drwsa5kwu1lw0" path="res://button_6.gd" id="8_a62e2"]
 
 [node name="shields" type="Node2D" unique_id=1362283637]
-script = ExtResource("1_rj586")
+script = ExtResource("1_wt7s3")
 
 [node name="Button" type="Button" parent="." unique_id=1090925912]
 offset_left = 502.0
 offset_top = 70.0
 offset_right = 638.0
 offset_bottom = 206.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("2_epypp")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("3_mfmaq")
 
 [node name="Button2" type="Button" parent="." unique_id=1445139722]
 offset_left = 849.0
 offset_top = 63.0
 offset_right = 985.0
 offset_bottom = 199.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("3_0hol4")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("4_bhac6")
 
 [node name="Button3" type="Button" parent="." unique_id=15436905]
 offset_left = 126.0
 offset_top = 72.0
 offset_right = 262.0
 offset_bottom = 208.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("4_q6r6c")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("5_nnl4f")
 
 [node name="Button4" type="Button" parent="." unique_id=1435072283]
 offset_left = 132.0
 offset_top = 313.0
 offset_right = 268.0
 offset_bottom = 449.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("5_d21ai")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("6_cu33v")
 
 [node name="Button5" type="Button" parent="." unique_id=1507929587]
 offset_left = 497.0
 offset_top = 321.0
 offset_right = 633.0
 offset_bottom = 457.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("6_rj586")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("7_li3oj")
 
 [node name="Button6" type="Button" parent="." unique_id=1551520249]
 offset_left = 844.0
 offset_top = 321.0
 offset_right = 980.0
 offset_bottom = 457.0
-icon = ExtResource("1_0e48y")
-script = ExtResource("7_4d7sh")
+icon = ExtResource("2_7dx7h")
+script = ExtResource("8_a62e2")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

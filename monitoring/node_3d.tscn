@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://lp0smlhoqe3p"]
 
+[ext_resource type="Script" uid="uid://bjoy2fpcwhff" path="res://node_3d.gd" id="1_i5arm"]
+[ext_resource type="PackedScene" uid="uid://c4tbrgb7gbnbc" path="res://switcher.tscn" id="1_jka67"]
 [ext_resource type="Script" uid="uid://dejb6bxwdblgf" path="res://character_body_3d.gd" id="1_r3fl7"]
 [ext_resource type="Script" uid="uid://qcorh6p4dxxh" path="res://camera_3d.gd" id="2_jka67"]
 [ext_resource type="PackedScene" uid="uid://dn1f4y7qb2wpj" path="res://monitor.tscn" id="3_a0tk4"]
@@ -29,6 +31,10 @@ agent_radius = 1.0
 size = Vector3(30, 0.1, 30)
 
 [node name="Node3D" type="Node3D" unique_id=1729448010]
+script = ExtResource("1_i5arm")
+
+[node name="switcher" parent="." unique_id=1180401452 instance=ExtResource("1_jka67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5280092, -11.179098)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1685892877 groups=["caramel", "player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2283728, 0)
