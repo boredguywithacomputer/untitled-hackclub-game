@@ -5,9 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5cpln"]
 albedo_color = Color(0.77269953, 0.5704434, 0.58679634, 1)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_hbih1"]
-radius = 0.45
-height = 1.9
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_wc5p8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjt7s"]
 radius = 0.55
@@ -22,7 +20,7 @@ script = ExtResource("1_qh22o")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1702127264]
 material_override = SubResource("StandardMaterial3D_5cpln")
-mesh = SubResource("CapsuleMesh_hbih1")
+mesh = SubResource("CapsuleMesh_wc5p8")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=113576525]
 
