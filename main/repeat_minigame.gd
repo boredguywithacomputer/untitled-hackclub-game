@@ -55,6 +55,7 @@ func _make_button(index: int) -> Button:
 	button_grid.add_child(btn)
 	return btn
 
+# button styling, set colors, tweak corner radii, override stylebox
 func _style_button(btn: Button) -> void:
 	var colors := { # all of the button colors (shades of gray)
 		"normal": Color(0.55, 0.55, 0.58),
@@ -68,6 +69,7 @@ func _style_button(btn: Button) -> void:
 		sb.set_corner_radius_all(6)
 		btn.add_theme_stylebox_override(style_name, sb)
 
+# intialization function, basically starts the light sequence
 func _start_round() -> void:
 	state = State.SHOWING
 	_set_buttons_enabled(false)
@@ -86,12 +88,14 @@ func _start_round() -> void:
 		tw.tween_interval(FLASH_OFF)
 	tw.tween_callback(_begin_input)
 
+# once the light sequence is over, opens up input to the player
 func _begin_input() -> void:
 	state = State.ENTERING
 	input_index = 0
 	time_left = INPUT_TIME
 	_set_buttons_enabled(true)
 
+# modular light/button setting functions
 func _set_light(index: int, on: bool) -> void:
 	lights[index].color = COLOR_ON if on else COLOR_OFF
 	
@@ -115,6 +119,7 @@ func _on_button_pressed(index: int) -> void:
 	if input_index == sequence.size():
 		_win()
 
+# main process of player input, along with a timer to time out if player takes too long
 func _process(delta: float) -> void:
 	if state != State.ENTERING:
 		return
@@ -134,7 +139,8 @@ func _fail() -> void:
 		tw.tween_callback(_set_all_lights.bind(false))
 		tw.tween_interval(FAIL_FLASH_TIME)
 	tw.tween_callback(_start_round)
-	
+
+# close off functions (win condition)
 func _win() -> void:
 	state = State.DONE
 	_set_buttons_enabled(false)
