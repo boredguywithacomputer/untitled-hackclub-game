@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://qcorh6p4dxxh" path="res://camera_3d.gd" id="2_noarx"]
 [ext_resource type="Script" uid="uid://bmnwym5t4enom" path="res://loot_llama.gd" id="3_a0tk4"]
 [ext_resource type="Script" uid="uid://dlq6mavbu7bq3" path="res://models/flamethrower.gd" id="4_i5arm"]
-[ext_resource type="PackedScene" uid="uid://cgye7ghib5045" path="res://flamethrower.glb" id="4_jka67"]
+[ext_resource type="PackedScene" uid="uid://cgye7ghib5045" path="res://models/flamethrower.glb" id="4_jka67"]
 [ext_resource type="Script" uid="uid://6q33gsl1ha8y" path="res://canvas_layer.gd" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://b28v3y1vfv11o" path="res://models/gas.glb" id="6_4arys"]
 [ext_resource type="Script" uid="uid://dfg51hdbq46j6" path="res://door.gd" id="6_wc5p8"]
+[ext_resource type="Script" uid="uid://lof6ghwnn7lb" path="res://slowdown.gd" id="8_jsk3o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4xowi"]
 
@@ -41,10 +43,23 @@ material = SubResource("StandardMaterial3D_i5arm")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(1, 1, 0.3)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5hio4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jka67"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6iypd"]
+size = Vector3(1, 1, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4arys"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wc5p8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc5p8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lgns8"]
+material = SubResource("StandardMaterial3D_wc5p8")
 
 [node name="Node3D" type="Node3D" unique_id=1729448010]
 
@@ -137,6 +152,7 @@ promptName = "Refuel"
 triggeredEvent = "Grab_Fuel"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Fuel" unique_id=104985071]
+visible = false
 mesh = SubResource("BoxMesh_lgns8")
 surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
 
@@ -149,6 +165,9 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Fuel/Hitbox" unique_id=1018047862]
 shape = SubResource("SphereShape3D_5hio4")
 
+[node name="gas" parent="Fuel" unique_id=794692449 instance=ExtResource("6_4arys")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
 [node name="Fuel2" type="RigidBody3D" parent="." unique_id=1200942483]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 6.906854)
 mass = 300.0
@@ -156,16 +175,8 @@ script = ExtResource("3_a0tk4")
 promptName = "Refuel"
 triggeredEvent = "Grab_Fuel"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Fuel2" unique_id=421986854]
-mesh = SubResource("BoxMesh_lgns8")
-surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Fuel2" unique_id=455511645]
-mesh = SubResource("BoxMesh_lgns8")
-surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Fuel2" unique_id=2035176314]
-shape = SubResource("BoxShape3D_lgns8")
+shape = SubResource("BoxShape3D_6iypd")
 
 [node name="Hitbox" type="Area3D" parent="Fuel2" unique_id=305148974]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -173,8 +184,11 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Fuel2/Hitbox" unique_id=1638266859]
 shape = SubResource("SphereShape3D_5hio4")
 
+[node name="gas" parent="Fuel2" unique_id=995519572 instance=ExtResource("6_4arys")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
 [node name="Door" type="RigidBody3D" parent="." unique_id=603209943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3, -5.093146)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 8)
 collision_layer = 16
 mass = 300.0
 script = ExtResource("6_wc5p8")
@@ -183,13 +197,8 @@ script = ExtResource("6_wc5p8")
 mesh = SubResource("BoxMesh_lgns8")
 surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Door" unique_id=1436865134]
-layers = 16
-mesh = SubResource("BoxMesh_lgns8")
-surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=414491945]
-shape = SubResource("BoxShape3D_lgns8")
+shape = SubResource("BoxShape3D_4arys")
 
 [node name="Hitbox" type="Area3D" parent="Door" unique_id=122030379]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -222,3 +231,15 @@ offset_top = 20.0
 offset_right = 60.0
 offset_bottom = 43.0
 vertical_alignment = 2
+
+[node name="Mud" type="Area3D" parent="." unique_id=2065136190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+script = ExtResource("8_jsk3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mud" unique_id=1554047267]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("CylinderShape3D_wc5p8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mud" unique_id=1527045573]
+transform = Transform3D(4, 0, 0, 0, 0.2, 0, 0, 0, 4, 0, 0, 0)
+mesh = SubResource("CylinderMesh_lgns8")

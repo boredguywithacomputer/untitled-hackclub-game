@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cgye7ghib5045"
-path="res://.godot/imported/flamethrower.glb-6215f11e6a0118baecc96710c7556eb3.scn"
+path="res://.godot/imported/flamethrower.glb-010ed78c3f36bec9e644f14784313bb2.scn"
 
 [deps]
 
-source_file="res://flamethrower.glb"
-dest_files=["res://.godot/imported/flamethrower.glb-6215f11e6a0118baecc96710c7556eb3.scn"]
+source_file="res://models/flamethrower.glb"
+dest_files=["res://.godot/imported/flamethrower.glb-010ed78c3f36bec9e644f14784313bb2.scn"]
 
 [params]
 
