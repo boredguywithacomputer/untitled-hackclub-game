@@ -16,7 +16,7 @@ func _process(_delta: float) -> void:
 		globalvars.maingame.visible = true
 		globalvars.maingame.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)
 		globalvars.switch1state = "off"
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		
+		globalvars.score += 1
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
 		

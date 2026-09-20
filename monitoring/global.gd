@@ -8,3 +8,4 @@ var mainparent = ""
 var maininst = ""
 var container: Node
 var switch1state = "on"
+var score = 0
