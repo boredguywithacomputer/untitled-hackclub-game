@@ -15,6 +15,8 @@ const WIRE_WIDTH := 20.0
 @onready var left_col: VBoxContainer = $Root/Panel/Board/Left
 @onready var right_col: VBoxContainer = $Root/Panel/Board/Right
 
+# variable initialization
+
 var squares: Array[ColorRect] = [] # initial square that dragging started from
 var dragging_from: ColorRect = null # the wire following the mouse
 var drag_line: Line2D = null
@@ -24,9 +26,9 @@ var connected_count := 0
 func _ready() -> void:
 	_build_squares()
 	
-	await get_tree().process_frame
-	for sq in squares:
-		print(sq.get_meta("side"), " ", sq.color, " ", sq.get_global_rect())
+	#await get_tree().process_frame
+	#for sq in squares:
+		#print(sq.get_meta("side"), " ", sq.color, " ", sq.get_global_rect())
 
 # create wire objects on left and right
 func _build_squares() -> void:
@@ -110,7 +112,7 @@ func _finish_drag() -> void:
 	
 	if target != null and _is_valid_match(dragging_from, target):
 		_snap(dragging_from, target)
-		print(dragging_from, " connected")
+		#print(dragging_from, " connected")
 	else:
 		drag_line.queue_free()
 	
@@ -139,7 +141,7 @@ func _snap(a: ColorRect, b: ColorRect) -> void:
 func _on_completed() -> void:
 	completed.emit()
 	print("successful completion")
-	await get_tree().create_timer(0.6).timeout
+	await get_tree().create_timer(1.6).timeout
 	close()
 	
 func close() -> void:

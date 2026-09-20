@@ -2,6 +2,8 @@ extends CanvasLayer
 
 signal completed
 
+# variable initialization
+
 const SLIDER_COUNT := 8
 const SLIDER_SIZE := Vector2(56, 280)
 const LIGHT_SIZE := 32.0 # diameter of each light
@@ -10,6 +12,31 @@ const START_MAX := 0.85
 const COLOR_ON := Color(1.0, 0.45, 0.45)
 const COLOR_OFF := Color(0.35, 0.05, 0.05)
 const COLOR_DONE := Color(0.2, 0.9, 0.35)
+const GRABBER_SIZE = Vector2i(36, 28)
+
+# slider styling
+
+var grabber_tex: ImageTexture
+var grabber_hover_tex: ImageTexture
+var grabber_off_tex: ImageTexture
+
+func _solid_texture(size: Vector2i, color: Color) -> ImageTexture:
+	var img := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+	img.fill(color)
+	return ImageTexture.create_from_image(img)
+	
+func _style_slider(s: VSlider) -> void:
+	var track := StyleBoxFlat.new()
+	track.bg_color = Color(0.12, 0.13, 0.16)
+	track.set_corner_radius_all(4)
+	track.content_margin_left = 8
+	track.content_margin_right = 8
+	s.add_theme_stylebox_override("slider", track)
+	s.add_theme_stylebox_override("grabber_area", StyleBoxEmpty.new())
+	s.add_theme_stylebox_override("grabber_area_highlight", StyleBoxEmpty.new())
+	s.add_theme_icon_override("grabber", grabber_tex)
+	s.add_theme_icon_override("grabber_highlight", grabber_hover_tex)
+	s.add_theme_icon_override("grabber_disabled", grabber_off_tex)
 
 class Lane:
 	var slider: VSlider
@@ -23,9 +50,13 @@ var lanes: Array[Lane] = []
 var done_count := 0
 
 func _ready() -> void:
+	grabber_tex = _solid_texture(GRABBER_SIZE, Color(0.85, 0.87, 0.9))
+	grabber_hover_tex = _solid_texture(GRABBER_SIZE, Color.WHITE)
+	grabber_off_tex = _solid_texture(GRABBER_SIZE, Color(0.45, 0.47, 0.5))
+	
 	var directions: Array[bool] = []
 	for i in SLIDER_COUNT:
-		directions.append(i % 2 == 0) # half of them go up, half of them go down
+		directions.append(randf() < 0.5) # some of them go up, some of them go down
 	directions.shuffle()
 	
 	for move_up in directions:
@@ -56,6 +87,7 @@ func _make_lane(move_up: bool) -> Lane:
 	
 	# slider parameters
 	var s := VSlider.new()
+	_style_slider(s)
 	s.min_value = 0.0
 	s.max_value = 1.0
 	s.step = 0.001
@@ -91,6 +123,7 @@ func _lock_in(lane: Lane) -> void:
 
 func _on_completed() -> void:
 	completed.emit()
+	print("successful completion")
 	await get_tree().create_timer(1.6).timeout
 	close()
 	

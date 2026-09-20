@@ -2,10 +2,12 @@ extends CanvasLayer
 
 signal completed
 
+# variable initialization
+
 const LEAF_COUNT := 10
 const LEAF_SIZE := Vector2(56, 56)
-const SUCTION_RADIUS := 150.0
-const MIN_V := 90.0
+const SUCTION_RADIUS := 150.0 # how close a leaf needs to get to the center of the left side to get sucked in
+const MIN_V := 90.0 # speed of the leaves will range between these numbers
 const MAX_V := 170.0
 const ROAM_RECT := Rect2(200, 20, 800, 610)
 
@@ -130,7 +132,7 @@ func _on_leaf_absorbed(leaf: Control) -> void:
 		
 func _on_completed() -> void:
 	completed.emit()
-	await get_tree().create_timer(0.6).timeout
+	await get_tree().create_timer(1.6).timeout
 	print("successful completion")
 	close()
 

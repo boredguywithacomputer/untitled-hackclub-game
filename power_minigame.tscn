@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cdh4ym4fknuf" path="res://power_minigame.gd" id="1_ousdp"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ousdp"]
+content_margin_left = 48.0
+content_margin_top = 24.0
+content_margin_right = 48.0
+content_margin_bottom = 24.0
+
 [node name="PowerMinigame" type="CanvasLayer" unique_id=811661893]
 script = ExtResource("1_ousdp")
 
@@ -36,6 +42,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ousdp")
 
 [node name="Board" type="HBoxContainer" parent="Root/Panel" unique_id=1348637690]
 layout_mode = 2
