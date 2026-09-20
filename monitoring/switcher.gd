@@ -12,11 +12,11 @@ func _process(_delta: float) -> void:
 
 
 
-
+ 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("caramel"):
 		print("pressed")
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		get_tree().root.add_child(globalvars.shields)
-		var parent = globalvars.maingame.get_parent()
-		parent.remove_child.call_deferred(globalvars.maingame)
+		globalvars.mainparent = globalvars.maingame.get_parent()
+		globalvars.mainparent.remove_child.call_deferred(globalvars.maingame)
