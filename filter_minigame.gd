@@ -3,13 +3,12 @@ extends CanvasLayer
 signal completed
 
 # variable initialization
-
 const LEAF_COUNT := 10
 const LEAF_SIZE := Vector2(56, 56)
 const SUCTION_RADIUS := 150.0 # how close a leaf needs to get to the center of the left side to get sucked in
 const MIN_V := 90.0 # speed of the leaves will range between these numbers
 const MAX_V := 170.0
-const ROAM_RECT := Rect2(200, 20, 800, 610)
+const ROAM_RECT := Rect2(200, 20, 800, 610) # bounding box that free floating leaves will be in
 
 @export var leaf_texture: Texture2D
 
@@ -21,10 +20,11 @@ var active_leaves: Array[Control] = []
 var dragging: Control = null
 var remaining := LEAF_COUNT
 
+# initialization functions
 func _ready() -> void:
 	for i in LEAF_COUNT:
 		_spawn_leaf()
-		
+
 func _spawn_leaf() -> void:
 	var leaf := _make_leaf()
 	leaf.position = Vector2(
@@ -38,6 +38,7 @@ func _spawn_leaf() -> void:
 	leaves.add_child(leaf)
 	active_leaves.append(leaf)
 	
+# render the texture or rectangle placeholder for each leaf
 func _make_leaf() -> Control:
 	var leaf: Control
 	if leaf_texture:
@@ -56,6 +57,7 @@ func _make_leaf() -> Control:
 	leaf.mouse_filter = Control.MOUSE_FILTER_STOP
 	return leaf
 
+# detect when the user starts dragging around a leaf
 func _on_leaf_gui_input(event: InputEvent, leaf: Control) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
@@ -64,6 +66,7 @@ func _on_leaf_gui_input(event: InputEvent, leaf: Control) -> void:
 		dragging = leaf
 		leaf.move_to_front()
 
+# main leaf loop, float around randomly when user is not clicking it
 func _process(delta: float) -> void:
 	for leaf in active_leaves:
 		if leaf == dragging:
@@ -72,20 +75,22 @@ func _process(delta: float) -> void:
 		else:
 			_drift(leaf, delta)
 
+# trajectory calculations for random floating
 func _drift(leaf: Control, delta: float) -> void:
 	var vel: Vector2 = leaf.get_meta("vel")
 	leaf.position += vel * delta
 	leaf.rotation += float(leaf.get_meta("spin")) * delta
 	
-	var min_p := ROAM_RECT.position
-	var max_p := ROAM_RECT.end - LEAF_SIZE
+	# minimum and maximum positions on the x, y axes
+	var min_pos := ROAM_RECT.position
+	var max_pos := ROAM_RECT.end - LEAF_SIZE
 	
 	# bounce only when heading outwards
-	if (leaf.position.x < min_p.x and vel.x < 0.0) \
-	or (leaf.position.x > max_p.x and vel.x > 0.0):
+	if (leaf.position.x < min_pos.x and vel.x < 0.0) \
+	or (leaf.position.x > max_pos.x and vel.x > 0.0):
 		vel.x = -vel.x
-	if (leaf.position.y < min_p.y and vel.y < 0.0) \
-	or (leaf.position.y > max_p.y and vel.y > 0.0):
+	if (leaf.position.y < min_pos.y and vel.y < 0.0) \
+	or (leaf.position.y > max_pos.y and vel.y > 0.0):
 		vel.y = -vel.y
 	leaf.set_meta("vel", vel)
 	
@@ -93,13 +98,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		close()
 		return
-		
+	
+	# detect when the user stops dragging the leaf 
 	if dragging != null \
 	and event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and not event.pressed:
 		_release_leaf()
 
+# either let the leaf get sucked in or continue its random trajectory
 func _release_leaf() -> void:
 	var leaf := dragging
 	dragging = null
@@ -107,12 +114,14 @@ func _release_leaf() -> void:
 		_suck_in(leaf)
 	# otherwise do nothing and let the _process() function pick it back up
 
+# transform functions for finding the center of objects
 func _leaf_center(leaf: Control) -> Vector2:
 	return leaf.position + LEAF_SIZE / 2.0
 
 func _port_center() -> Vector2:
 	return port.position + port.size / 2.0
-	
+
+# funny animation where it spins and shrinks :3
 func _suck_in(leaf: Control) -> void:
 	active_leaves.erase(leaf)
 	leaf.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -124,12 +133,14 @@ func _suck_in(leaf: Control) -> void:
 	tw.tween_property(leaf, "rotation", leaf.rotation + TAU, 0.25)
 	tw.finished.connect(_on_leaf_absorbed.bind(leaf))
 
+# counter function effectively
 func _on_leaf_absorbed(leaf: Control) -> void:
 	leaf.queue_free()
 	remaining -= 1
 	if remaining == 0:
 		_on_completed()
-		
+
+# close off functions (win condition)	
 func _on_completed() -> void:
 	completed.emit()
 	await get_tree().create_timer(1.6).timeout

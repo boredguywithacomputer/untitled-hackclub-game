@@ -2,16 +2,17 @@ extends CanvasLayer
 
 signal completed
 
+# variable initialization
 const CELL_COUNT := 9
 const CELL_SIZE := Vector2(64, 64)
-const SEQUENCE_LENGTH := 6
-const FLASH_ON := 0.5
+const SEQUENCE_LENGTH := 5 # keep this around 5 bro ts too hard :(
+const FLASH_ON := 0.5 # the timing for flashes during the sequence display
 const FLASH_OFF := 0.5
 const START_DELAY := 0.8
-const INPUT_TIME := 12.0
-const FAIL_FLASHES := 3
+const INPUT_TIME := 12.0 # how long the player has to input their sequence before the game times out
+const FAIL_FLASHES := 3 # how many times the panel flashes when you fail
 const FAIL_FLASH_TIME := 0.25
-const COLOR_OFF := Color(0.35, 0.05, 0.05)
+const COLOR_OFF := Color(0.35, 0.05, 0.05) # all of the light colors
 const COLOR_ON := Color(1.0, 0.2, 0.2)
 
 enum State { SHOWING, ENTERING, FAILED, DONE }
@@ -26,6 +27,7 @@ var time_left := 0.0
 var buttons: Array[Button] = []
 var lights: Array[ColorRect] = []
 
+# initialization functions, self explanatory
 func _ready() -> void:
 	for i in CELL_COUNT:
 		lights.append(_make_light())
@@ -54,7 +56,7 @@ func _make_button(index: int) -> Button:
 	return btn
 
 func _style_button(btn: Button) -> void:
-	var colors := {
+	var colors := { # all of the button colors (shades of gray)
 		"normal": Color(0.55, 0.55, 0.58),
 		"hover": Color(0.68, 0.68, 0.72),
 		"pressed": Color(0.85, 0.85, 0.9),
@@ -72,8 +74,8 @@ func _start_round() -> void:
 	
 	sequence.clear()
 	for i in SEQUENCE_LENGTH:
-		sequence.append(randi.range(0, CELL_COUNT - 1))
-	print(sequence)
+		sequence.append(randi_range(0, CELL_COUNT - 1))
+	#print(sequence)
 	
 	var tw := create_tween()
 	tw.tween_interval(START_DELAY)
@@ -108,7 +110,6 @@ func _on_button_pressed(index: int) -> void:
 	if index != sequence[input_index]:
 		_fail()
 		return
-	
 	# otherwise, the player pressed the correct button so continue the sequence
 	input_index += 1
 	if input_index == sequence.size():
@@ -121,6 +122,7 @@ func _process(delta: float) -> void:
 	if time_left <= 0.0:
 		_fail()
 
+# if the player times out or enters the wrong sequence
 func _fail() -> void:
 	state = State.FAILED
 	_set_buttons_enabled(false)
@@ -141,6 +143,10 @@ func _win() -> void:
 	var tw := create_tween()
 	tw.tween_interval(0.6)
 	tw.tween_callback(close)
+
+	print("successful completion")
+	await get_tree().create_timer(1.0).timeout
+	close()
 	
 func close() -> void:
 	get_tree().paused = false

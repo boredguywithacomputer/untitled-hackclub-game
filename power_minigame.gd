@@ -3,7 +3,6 @@ extends CanvasLayer
 signal completed
 
 # variable initialization
-
 const SLIDER_COUNT := 8
 const SLIDER_SIZE := Vector2(56, 280)
 const LIGHT_SIZE := 32.0 # diameter of each light
@@ -12,7 +11,7 @@ const START_MAX := 0.85
 const COLOR_ON := Color(1.0, 0.45, 0.45)
 const COLOR_OFF := Color(0.35, 0.05, 0.05)
 const COLOR_DONE := Color(0.2, 0.9, 0.35)
-const GRABBER_SIZE = Vector2i(36, 28)
+const GRABBER_SIZE = Vector2i(36, 28) # width and height of movable square
 
 # slider styling
 
@@ -20,6 +19,7 @@ var grabber_tex: ImageTexture
 var grabber_hover_tex: ImageTexture
 var grabber_off_tex: ImageTexture
 
+# texturing and styling the sliders to look good
 func _solid_texture(size: Vector2i, color: Color) -> ImageTexture:
 	var img := Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
 	img.fill(color)
@@ -38,6 +38,7 @@ func _style_slider(s: VSlider) -> void:
 	s.add_theme_icon_override("grabber_highlight", grabber_hover_tex)
 	s.add_theme_icon_override("grabber_disabled", grabber_off_tex)
 
+# create a class for each lane including the light and the slider
 class Lane:
 	var slider: VSlider
 	var light_style: StyleBoxFlat
@@ -49,11 +50,14 @@ class Lane:
 var lanes: Array[Lane] = []
 var done_count := 0
 
+# intialization function
 func _ready() -> void:
+	# texture initialization for slider styling
 	grabber_tex = _solid_texture(GRABBER_SIZE, Color(0.85, 0.87, 0.9))
 	grabber_hover_tex = _solid_texture(GRABBER_SIZE, Color.WHITE)
 	grabber_off_tex = _solid_texture(GRABBER_SIZE, Color(0.45, 0.47, 0.5))
 	
+	# loops to create the random slider directions
 	var directions: Array[bool] = []
 	for i in SLIDER_COUNT:
 		directions.append(randf() < 0.5) # some of them go up, some of them go down
@@ -62,10 +66,12 @@ func _ready() -> void:
 	for move_up in directions:
 		lanes.append(_make_lane(move_up))
 
+# basic input function
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		close()
 
+# render all of the components of a single lane, iterate over this function
 func _make_lane(move_up: bool) -> Lane:
 	var lane := Lane.new()
 	lane.move_up = move_up
@@ -100,6 +106,7 @@ func _make_lane(move_up: bool) -> Lane:
 	
 	return lane
 
+# detect when the user is dragging the slider around
 func _on_slider_changed(value: float, lane: Lane) -> void:
 	if lane.done:
 		return
@@ -121,6 +128,7 @@ func _lock_in(lane: Lane) -> void:
 	if done_count == SLIDER_COUNT:
 		_on_completed()
 
+# close off functions (win condition)
 func _on_completed() -> void:
 	completed.emit()
 	print("successful completion")

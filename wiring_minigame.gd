@@ -16,7 +16,6 @@ const WIRE_WIDTH := 20.0
 @onready var right_col: VBoxContainer = $Root/Panel/Board/Right
 
 # variable initialization
-
 var squares: Array[ColorRect] = [] # initial square that dragging started from
 var dragging_from: ColorRect = null # the wire following the mouse
 var drag_line: Line2D = null
