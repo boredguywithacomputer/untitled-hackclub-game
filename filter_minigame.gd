@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 	for leaf in active_leaves:
 		if leaf == dragging:
 			var pos := leaves.get_local_mouse_position()
-			leaf.position = p.clamp(Vector2.ZERO, board.size - LEAF_SIZE)
+			leaf.position = pos.clamp(Vector2.ZERO, board.size - LEAF_SIZE)
 		else:
 			_drift(leaf, delta)
 
@@ -87,3 +87,53 @@ func _drift(leaf: Control, delta: float) -> void:
 		vel.y = -vel.y
 	leaf.set_meta("vel", vel)
 	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		close()
+		return
+		
+	if dragging != null \
+	and event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_LEFT \
+	and not event.pressed:
+		_release_leaf()
+
+func _release_leaf() -> void:
+	var leaf := dragging
+	dragging = null
+	if _leaf_center(leaf).distance_to(_port_center()) <= SUCTION_RADIUS:
+		_suck_in(leaf)
+	# otherwise do nothing and let the _process() function pick it back up
+
+func _leaf_center(leaf: Control) -> Vector2:
+	return leaf.position + LEAF_SIZE / 2.0
+
+func _port_center() -> Vector2:
+	return port.position + port.size / 2.0
+	
+func _suck_in(leaf: Control) -> void:
+	active_leaves.erase(leaf)
+	leaf.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	var tw := create_tween().set_parallel(true)
+	tw.tween_property(leaf, "position", _port_center() - LEAF_SIZE / 2.0, 0.25) \
+	.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tw.tween_property(leaf, "scale", Vector2.ZERO, 0.25)
+	tw.tween_property(leaf, "rotation", leaf.rotation + TAU, 0.25)
+	tw.finished.connect(_on_leaf_absorbed.bind(leaf))
+
+func _on_leaf_absorbed(leaf: Control) -> void:
+	leaf.queue_free()
+	remaining -= 1
+	if remaining == 0:
+		_on_completed()
+		
+func _on_completed() -> void:
+	completed.emit()
+	await get_tree().create_timer(0.6).timeout
+	print("successful completion")
+	close()
+
+func close() -> void:
+	get_tree().paused = false
+	queue_free()

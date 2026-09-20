@@ -7,33 +7,32 @@ script = ExtResource("1_4mnqt")
 
 [node name="Root" type="Control" parent="." unique_id=339591384]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Dim" type="ColorRect" parent="Root" unique_id=2038993715]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Root" unique_id=273891334]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Board" type="Control" parent="Root/Panel" unique_id=661381072]
 custom_minimum_size = Vector2(800, 450)
 clip_contents = true
 layout_mode = 2
-
-[node name="Port" type="TextureRect" parent="Root/Panel/Board" unique_id=1509291177]
-custom_minimum_size = Vector2(120, 240)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 
 [node name="Leaves" type="Control" parent="Root/Panel/Board" unique_id=483653298]
 layout_mode = 1
@@ -42,3 +41,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Port" type="ColorRect" parent="Root/Panel/Board" unique_id=72051809]
+custom_minimum_size = Vector2(120, 240)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.3821775, 0.36396405, 1)
