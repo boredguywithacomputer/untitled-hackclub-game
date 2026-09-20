@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dt8dfucbamtur"]
+
+[ext_resource type="Script" uid="uid://cf1ff7jl14mt6" path="res://tryagain.gd" id="1_h3ym8"]
+[ext_resource type="Script" uid="uid://dkyt78vekky2s" path="res://giveup.gd" id="2_7hir2"]
+
+[node name="lose_screen" type="Control" unique_id=1295832300]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1979825772]
+z_index = 1
+layout_mode = 0
+offset_left = 359.0
+offset_top = 228.0
+offset_right = 1240.0
+offset_bottom = 496.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 75
+text = "You lost..."
+
+[node name="Button" type="Button" parent="." unique_id=76737353]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 403.0
+offset_right = 390.0
+offset_bottom = 434.0
+theme_override_font_sizes/font_size = 30
+text = "Try again?"
+script = ExtResource("1_h3ym8")
+
+[node name="Button2" type="Button" parent="." unique_id=1369211257]
+layout_mode = 0
+offset_left = 641.0
+offset_top = 403.0
+offset_right = 771.0
+offset_bottom = 453.0
+theme_override_font_sizes/font_size = 30
+text = "Give up?"
+script = ExtResource("2_7hir2")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
