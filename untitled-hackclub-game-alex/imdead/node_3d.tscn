@@ -1,0 +1,289 @@
+[gd_scene format=3 uid="uid://lp0smlhoqe3p"]
+
+[ext_resource type="Script" uid="uid://dejb6bxwdblgf" path="res://character_body_3d.gd" id="1_a202f"]
+[ext_resource type="Script" uid="uid://qcorh6p4dxxh" path="res://camera_3d.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://bmnwym5t4enom" path="res://loot_llama.gd" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://dlq6mavbu7bq3" path="res://models/flamethrower.gd" id="4_i5arm"]
+[ext_resource type="PackedScene" uid="uid://cgye7ghib5045" path="res://models/flamethrower.glb" id="4_jka67"]
+[ext_resource type="Script" uid="uid://6q33gsl1ha8y" path="res://canvas_layer.gd" id="4_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://b28v3y1vfv11o" path="res://models/gas.glb" id="6_4arys"]
+[ext_resource type="PackedScene" uid="uid://d0lyf43p086ct" path="res://gameitems/fuel.tscn" id="6_6iypd"]
+[ext_resource type="Script" uid="uid://dfg51hdbq46j6" path="res://door.gd" id="6_wc5p8"]
+[ext_resource type="Script" uid="uid://lof6ghwnn7lb" path="res://slowdown.gd" id="8_jsk3o"]
+[ext_resource type="Script" uid="uid://btmoqb6aex4aa" path="res://Shop.gd" id="10_cdqbm"]
+[ext_resource type="PackedScene" uid="uid://byl23mkde3umv" path="res://gameitems/shop.glb" id="11_tereu"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4xowi"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lgns8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_236rp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4xowi"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_lgns8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5hio4"]
+size = Vector3(60, 0.1, 60)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ys3fy"]
+sky_top_color = Color(0.36734706, 0.44647187, 0.4794082, 1)
+sky_horizon_color = Color(0.6431373, 0.44313726, 0.36078432, 1)
+
+[sub_resource type="Sky" id="Sky_r3fl7"]
+sky_material = SubResource("ProceduralSkyMaterial_ys3fy")
+
+[sub_resource type="Environment" id="Environment_lgns8"]
+background_mode = 2
+sky = SubResource("Sky_r3fl7")
+ambient_light_source = 3
+ambient_light_color = Color(0.6074128, 0.6693338, 0.57605195, 1)
+reflected_light_source = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.17508557, 0.299049, 0.30373913, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgns8"]
+material = SubResource("StandardMaterial3D_i5arm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.28941622, 0.40046108, 0.23264965, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(1, 1, 0.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5hio4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jka67"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6iypd"]
+size = Vector3(1, 1, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iypd"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.011063921, 0.021888506, 0.0069294306, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4arys"]
+
+[sub_resource type="FontVariation" id="FontVariation_3v7ru"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wc5p8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc5p8"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.43803945, 0.25745216, 0.24744117, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lgns8"]
+material = SubResource("StandardMaterial3D_wc5p8")
+
+[node name="Node3D" type="Node3D" unique_id=1729448010]
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1375248625]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 8, 0)
+script = ExtResource("1_a202f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=522990499]
+shape = SubResource("CylinderShape3D_4xowi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=705312166]
+mesh = SubResource("CapsuleMesh_lgns8")
+
+[node name="Camera3D" type="Camera3D" parent="Player/MeshInstance3D" unique_id=1055353255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_noarx")
+
+[node name="flamethrower" parent="Player/MeshInstance3D/Camera3D" unique_id=2123042881 instance=ExtResource("4_jka67")]
+transform = Transform3D(-1.5497033e-08, -2.732545e-09, -0.36, -0.062513344, 0.3545308, 0, 0.3545308, 0.062513344, -1.57361e-08, 0.5, -0.21866131, -0.8949595)
+script = ExtResource("4_i5arm")
+
+[node name="Hitbox" type="Area3D" parent="Player/MeshInstance3D/Camera3D/flamethrower" unique_id=473736985]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/MeshInstance3D/Camera3D/flamethrower/Hitbox" unique_id=1532071211]
+transform = Transform3D(7, 2.5033955e-07, 8.893848e-22, -2.5033955e-07, 7, 2.4868999e-14, 0, -2.4868999e-14, 7, -2.857, -0.504, 0)
+shape = SubResource("SphereShape3D_236rp")
+
+[node name="Floor" type="RigidBody3D" parent="." unique_id=909522897]
+physics_material_override = SubResource("PhysicsMaterial_4xowi")
+gravity_scale = 0.0
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=2081888588]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+mesh = SubResource("PlaneMesh_lgns8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=23816970]
+shape = SubResource("BoxShape3D_5hio4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1218125405]
+environment = SubResource("Environment_lgns8")
+
+[node name="Fishy" type="RigidBody3D" parent="." unique_id=1316466283]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 3)
+mass = 300.0
+script = ExtResource("3_a0tk4")
+promptName = "Take Fishy"
+triggeredEvent = "Grab_Fish"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fishy" unique_id=768772424]
+mesh = SubResource("BoxMesh_lgns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fishy" unique_id=1810029514]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="Hitbox" type="Area3D" parent="Fishy" unique_id=939205098]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fishy/Hitbox" unique_id=1844688015]
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="Flamethrower" type="RigidBody3D" parent="." unique_id=1565835511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 3)
+mass = 6000.0
+physics_material_override = SubResource("PhysicsMaterial_jka67")
+script = ExtResource("3_a0tk4")
+promptName = "Permanently Borrow Flamethrower"
+triggeredEvent = "Grab_Flamethrower"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flamethrower" unique_id=298829859]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="Hitbox" type="Area3D" parent="Flamethrower" unique_id=841617862]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flamethrower/Hitbox" unique_id=1011350437]
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="flamethrower" parent="Flamethrower" unique_id=449929335 instance=ExtResource("4_jka67")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.2, 0)
+
+[node name="Fuel" parent="." unique_id=406247188 instance=ExtResource("6_6iypd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 4.906854)
+
+[node name="Fuel2" type="RigidBody3D" parent="." unique_id=1200942483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 3, 6.906854)
+mass = 300.0
+script = ExtResource("3_a0tk4")
+promptName = "Refuel"
+triggeredEvent = "Grab_Fuel"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fuel2" unique_id=2035176314]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="Hitbox" type="Area3D" parent="Fuel2" unique_id=305148974]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fuel2/Hitbox" unique_id=1638266859]
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="gas" parent="Fuel2" unique_id=995519572 instance=ExtResource("6_4arys")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="Door" type="RigidBody3D" parent="." unique_id=603209943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 8)
+collision_layer = 16
+mass = 300.0
+script = ExtResource("6_wc5p8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" unique_id=1655779428]
+mesh = SubResource("BoxMesh_lgns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_6iypd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=414491945]
+shape = SubResource("BoxShape3D_4arys")
+
+[node name="Hitbox" type="Area3D" parent="Door" unique_id=122030379]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_layer = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/Hitbox" unique_id=1332062725]
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1688848319]
+script = ExtResource("4_r3fl7")
+
+[node name="InteractPrompt" type="Label" parent="CanvasLayer" unique_id=1972338683]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = 188.5
+offset_right = 49.0
+offset_bottom = 211.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "E - INTERACT"
+
+[node name="Inventory" type="Label" parent="CanvasLayer" unique_id=515821359]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 43.0
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=286602636]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = 120.0
+offset_right = -300.0
+offset_bottom = -120.0
+color = Color(0.34117648, 0.5921569, 0.49019608, 0.57254905)
+script = ExtResource("10_cdqbm")
+
+[node name="Fishcount" type="Label" parent="CanvasLayer/ColorRect" unique_id=660120281]
+layout_mode = 0
+offset_right = 552.0
+offset_bottom = 49.0
+text = "You have _ fishes"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/ColorRect" unique_id=1827200208]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 10.0
+offset_right = 542.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_fonts/font = SubResource("FontVariation_3v7ru")
+text = "X"
+
+[node name="Mud" type="Area3D" parent="." unique_id=2065136190]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -3)
+script = ExtResource("8_jsk3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mud" unique_id=1554047267]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("CylinderShape3D_wc5p8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mud" unique_id=1527045573]
+transform = Transform3D(4, 0, 0, 0, 0.2, 0, 0, 0, 4, 0, 0, 0)
+mesh = SubResource("CylinderMesh_lgns8")
+
+[node name="Shop" type="RigidBody3D" parent="." unique_id=990991511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -7.0931473)
+mass = 300.0
+script = ExtResource("3_a0tk4")
+promptName = "Open Shop"
+triggeredEvent = "Open_Shop"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop" unique_id=2112265495]
+shape = SubResource("BoxShape3D_6iypd")
+
+[node name="Hitbox" type="Area3D" parent="Shop" unique_id=1835961735]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shop/Hitbox" unique_id=1148916761]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_5hio4")
+
+[node name="shop" parent="Shop" unique_id=1827555326 instance=ExtResource("11_tereu")]

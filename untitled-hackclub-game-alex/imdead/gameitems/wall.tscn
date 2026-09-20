@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ce3x6hx1i04fd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6iypd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgns8"]
+material = SubResource("StandardMaterial3D_i5arm")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lgns8"]
+size = Vector3(1, 1, 0.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5hio4"]
+
+[node name="Wall" type="RigidBody3D" unique_id=1690153671]
+disable_mode = 1
+mass = 300.0
+physics_material_override = SubResource("PhysicsMaterial_6iypd")
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1034835286]
+mesh = SubResource("BoxMesh_lgns8")
+surface_material_override/0 = SubResource("StandardMaterial3D_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2020450780]
+shape = SubResource("BoxShape3D_lgns8")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1420986785]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=231584108]
+shape = SubResource("SphereShape3D_5hio4")
