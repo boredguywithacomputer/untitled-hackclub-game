@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dfigqyp8m234g"]
 
 [ext_resource type="Texture2D" uid="uid://c8f2736ixbw82" path="res://icon.svg" id="1_0e48y"]
+[ext_resource type="Script" uid="uid://c8o36xxy2t5gi" path="res://shields.gd" id="1_rj586"]
 [ext_resource type="Script" uid="uid://dg131ua80m128" path="res://button.gd" id="2_epypp"]
 [ext_resource type="Script" uid="uid://b44wialk4lu0n" path="res://button_2.gd" id="3_0hol4"]
 [ext_resource type="Script" uid="uid://bkg5h0do0j1d4" path="res://button_3.gd" id="4_q6r6c"]
@@ -8,7 +9,8 @@
 [ext_resource type="Script" uid="uid://d1i32vrt6j5so" path="res://button_5.gd" id="6_rj586"]
 [ext_resource type="Script" uid="uid://drwsa5kwu1lw0" path="res://button_6.gd" id="7_4d7sh"]
 
-[node name="Node2D" type="Node2D" unique_id=1362283637]
+[node name="shields" type="Node2D" unique_id=1362283637]
+script = ExtResource("1_rj586")
 
 [node name="Button" type="Button" parent="." unique_id=1090925912]
 offset_left = 452.0
@@ -62,3 +64,6 @@ script = ExtResource("7_4d7sh")
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
 [connection signal="pressed" from="Button3" to="Button2" method="_on_button_3_pressed"]
 [connection signal="pressed" from="Button3" to="Button3" method="_on_pressed"]
+[connection signal="pressed" from="Button4" to="Button4" method="_on_pressed"]
+[connection signal="pressed" from="Button5" to="Button5" method="_on_pressed"]
+[connection signal="pressed" from="Button6" to="Button6" method="_on_pressed"]
