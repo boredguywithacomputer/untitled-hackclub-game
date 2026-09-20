@@ -2,12 +2,12 @@ extends CanvasLayer
 
 signal completed
 
-const LEAF_COUNT := 6
+const LEAF_COUNT := 10
 const LEAF_SIZE := Vector2(56, 56)
 const SUCTION_RADIUS := 150.0
-const MIN_V := 60.0
-const MAX_V := 140.0
-const ROAM_RECT := Rect2(300, 20, 480, 410)
+const MIN_V := 90.0
+const MAX_V := 170.0
+const ROAM_RECT := Rect2(200, 20, 800, 610)
 
 @export var leaf_texture: Texture2D
 

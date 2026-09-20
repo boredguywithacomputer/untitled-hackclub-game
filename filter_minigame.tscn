@@ -34,6 +34,16 @@ custom_minimum_size = Vector2(800, 450)
 clip_contents = true
 layout_mode = 2
 
+[node name="Port" type="ColorRect" parent="Root/Panel/Board" unique_id=72051809]
+custom_minimum_size = Vector2(120, 240)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 120.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0.3821775, 0.36396405, 1)
+
 [node name="Leaves" type="Control" parent="Root/Panel/Board" unique_id=483653298]
 layout_mode = 1
 anchors_preset = 15
@@ -41,12 +51,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Port" type="ColorRect" parent="Root/Panel/Board" unique_id=72051809]
-custom_minimum_size = Vector2(120, 240)
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0.3821775, 0.36396405, 1)
