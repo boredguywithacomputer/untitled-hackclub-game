@@ -2,23 +2,25 @@ extends CanvasLayer
 
 signal completed
 
+# modify to change number and type of colors (6 colors currently)
 const WIRE_COLORS: Array[Color] = [
 	Color.RED, Color.DARK_ORANGE, Color.YELLOW, Color.SEA_GREEN, Color.AQUAMARINE, Color.HOT_PINK
 ]
+
+# size and distancing of wire ends
 const SQUARE_SIZE := Vector2(48, 48)
-const WIRE_WIDTH := 10.0
+const WIRE_WIDTH := 20.0
 
 @onready var wires: Node2D = $Root/Panel/Board/Wires
 @onready var left_col: VBoxContainer = $Root/Panel/Board/Left
 @onready var right_col: VBoxContainer = $Root/Panel/Board/Right
 
-var squares: Array[ColorRect] = []
-# initial square that dragging started from
-var dragging_from: ColorRect = null
-# the wire following the mouse
+var squares: Array[ColorRect] = [] # initial square that dragging started from
+var dragging_from: ColorRect = null # the wire following the mouse
 var drag_line: Line2D = null
 var connected_count := 0
 
+# initialization
 func _ready() -> void:
 	_build_squares()
 	
@@ -26,6 +28,7 @@ func _ready() -> void:
 	for sq in squares:
 		print(sq.get_meta("side"), " ", sq.color, " ", sq.get_global_rect())
 
+# create wire objects on left and right
 func _build_squares() -> void:
 	var left_colors := WIRE_COLORS.duplicate()
 	var right_colors := WIRE_COLORS.duplicate()
@@ -37,6 +40,7 @@ func _build_squares() -> void:
 	for c in right_colors:
 		right_col.add_child(_make_square(c, &"right"))
 
+# create a single square, iterate over this function
 func _make_square(color: Color, side: StringName) -> ColorRect:
 	var sq := ColorRect.new()
 	sq.color = color
@@ -47,6 +51,7 @@ func _make_square(color: Color, side: StringName) -> ColorRect:
 	squares.append(sq)
 	return sq
 	
+# add square
 func _on_square_gui_input(event: InputEvent, square: ColorRect) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
@@ -105,6 +110,7 @@ func _finish_drag() -> void:
 	
 	if target != null and _is_valid_match(dragging_from, target):
 		_snap(dragging_from, target)
+		print(dragging_from, " connected")
 	else:
 		drag_line.queue_free()
 	
@@ -132,6 +138,7 @@ func _snap(a: ColorRect, b: ColorRect) -> void:
 
 func _on_completed() -> void:
 	completed.emit()
+	print("successful completion")
 	await get_tree().create_timer(0.6).timeout
 	close()
 	

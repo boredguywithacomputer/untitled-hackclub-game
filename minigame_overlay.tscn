@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cg081tpvmk2ps" path="res://minigame_overlay.gd" id="1_txglm"]
 
-[node name="MinigameOverlay" type="CanvasLayer" unique_id=811661893]
+[node name="WiringMinigame" type="CanvasLayer" unique_id=811661893]
 script = ExtResource("1_txglm")
 
 [node name="Root" type="Control" parent="." unique_id=1050842131]
