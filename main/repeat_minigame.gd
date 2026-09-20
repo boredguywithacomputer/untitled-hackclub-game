@@ -38,6 +38,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		close()
 
+# create the grid of light squares on the right
 func _make_light() -> ColorRect:
 	var light := ColorRect.new()
 	light.custom_minimum_size = CELL_SIZE
@@ -45,6 +46,7 @@ func _make_light() -> ColorRect:
 	light_grid.add_child(light)
 	return light
 
+# create the grid of button squares on the left
 func _make_button(index: int) -> Button:
 	var btn := Button.new()
 	btn.custom_minimum_size = CELL_SIZE

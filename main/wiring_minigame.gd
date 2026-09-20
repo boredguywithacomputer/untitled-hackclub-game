@@ -52,7 +52,7 @@ func _make_square(color: Color, side: StringName) -> ColorRect:
 	squares.append(sq)
 	return sq
 	
-# add square
+# detect clicks on the wire ends on either side of the screen
 func _on_square_gui_input(event: InputEvent, square: ColorRect) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
@@ -61,11 +61,13 @@ func _on_square_gui_input(event: InputEvent, square: ColorRect) -> void:
 			return
 		_start_drag(square)
 
+# handle user dragging the wire around by dynamically updating the wire (redraw it)
 func _start_drag(square: ColorRect) -> void:
 	dragging_from = square
 	drag_line = _make_wire(square.color)
 	_update_drag_line(drag_line)
 
+# redraw the floating wire everytime it moves
 func _make_wire(color: Color) -> Line2D:
 	var line := Line2D.new()
 	line.width = WIRE_WIDTH
@@ -76,6 +78,7 @@ func _make_wire(color: Color) -> Line2D:
 	wires.add_child(line)
 	return line
 
+# general transform and input functions
 func _center_of(square: Control) -> Vector2:
 	return square.get_global_rect().get_center()
 
@@ -94,6 +97,7 @@ func _input(event: InputEvent) -> void:
 	and not event.pressed:
 		_finish_drag()
 
+# feed in mouse input into line update functions
 func _update_drag_line(line: Line2D) -> void:
 	line.points = PackedVector2Array([
 		wires.to_local(_center_of(dragging_from)),
@@ -106,6 +110,7 @@ func _square_under_mouse() -> ColorRect:
 			return sq
 	return null
 	
+# when the user stops dragging a wire, detect if it should snap to another wire or be removed
 func _finish_drag() -> void:
 	var target := _square_under_mouse()
 	
@@ -117,7 +122,8 @@ func _finish_drag() -> void:
 	
 	dragging_from = null
 	drag_line = null
-	
+
+# detect if the user matched wires of the right color
 func _is_valid_match(a: ColorRect, b: ColorRect) -> bool:
 	return a != b \
 	and a.get_meta("side") != b.get_meta("side") \
@@ -137,6 +143,7 @@ func _snap(a: ColorRect, b: ColorRect) -> void:
 	if connected_count == WIRE_COLORS.size():
 		_on_completed()
 
+# close off functions (win condition)
 func _on_completed() -> void:
 	completed.emit()
 	print("successful completion")
