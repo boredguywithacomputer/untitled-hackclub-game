@@ -4,7 +4,6 @@ var buttonState = ""
 var switch = 2
 
 func _on_pressed() -> void: # changes the state of the button when clicked based on its current state
-	print("hi5!")
 	if buttonState == "off":
 		globalvars.buttonAmount += 1
 		buttonState = "on"
@@ -16,7 +15,6 @@ func _on_pressed() -> void: # changes the state of the button when clicked based
 	
 func _ready() -> void:
 	switch = (randi() % 2) # randomly decides whether the button is on or off
-	print(switch)
 	if switch == 0:
 		icon = load("res://off.png")
 		buttonState = "off"

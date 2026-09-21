@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void: # switches to the clean filter minigame if the player character runs into the cube
 	if body.is_in_group("caramel"):
-		print("leaves pressed")
 		if globalvars.switch3state == "on":
 			globalvars.container.add_child(globalvars.filter)
 			globalvars.maingame.visible = false

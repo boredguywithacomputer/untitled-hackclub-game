@@ -11,7 +11,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if globalvars.buttonAmount == 6:
 		globalvars.buttonAmount = 0 #if all buttons are on, sends back to main game, disables button, and increments score by 1
-		print("complete!")
 		globalvars.container.remove_child(globalvars.shields)
 		globalvars.maingame.visible = true
 		globalvars.maingame.set_process_mode.call_deferred(Node.PROCESS_MODE_INHERIT)

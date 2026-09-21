@@ -12,5 +12,4 @@ func _process(delta: float) -> void:
 
 
 func _on_pressed() -> void: # quits if give up is pressed
-	print("give up")
 	get_tree().quit()

@@ -37,25 +37,25 @@ icon = ExtResource("2_7dx7h")
 script = ExtResource("5_nnl4f")
 
 [node name="Button4" type="Button" parent="." unique_id=1435072283]
-offset_left = 132.0
-offset_top = 313.0
-offset_right = 268.0
-offset_bottom = 449.0
+offset_left = 126.0
+offset_top = 324.0
+offset_right = 262.0
+offset_bottom = 460.0
 icon = ExtResource("2_7dx7h")
 script = ExtResource("6_cu33v")
 
 [node name="Button5" type="Button" parent="." unique_id=1507929587]
-offset_left = 497.0
+offset_left = 504.0
 offset_top = 321.0
-offset_right = 633.0
+offset_right = 640.0
 offset_bottom = 457.0
 icon = ExtResource("2_7dx7h")
 script = ExtResource("7_li3oj")
 
 [node name="Button6" type="Button" parent="." unique_id=1551520249]
-offset_left = 844.0
+offset_left = 855.0
 offset_top = 321.0
-offset_right = 980.0
+offset_right = 991.0
 offset_bottom = 457.0
 icon = ExtResource("2_7dx7h")
 script = ExtResource("8_a62e2")
