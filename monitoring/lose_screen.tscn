@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dt8dfucbamtur"]
 
+[ext_resource type="Script" uid="uid://c51febhauyaow" path="res://scorecount.gd" id="1_7hir2"]
 [ext_resource type="Script" uid="uid://cf1ff7jl14mt6" path="res://tryagain.gd" id="1_h3ym8"]
 [ext_resource type="Script" uid="uid://dkyt78vekky2s" path="res://giveup.gd" id="2_7hir2"]
 
@@ -21,6 +22,16 @@ offset_bottom = 496.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 75
 text = "You lost..."
+
+[node name="Label" type="Label" parent="Label" unique_id=1444238126]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 312.0
+offset_right = 343.0
+offset_bottom = 367.0
+theme_override_font_sizes/font_size = 40
+text = "Placeholder Text"
+script = ExtResource("1_7hir2")
 
 [node name="Button" type="Button" parent="." unique_id=76737353]
 layout_mode = 0

@@ -21,6 +21,6 @@ func _process(_delta: float) -> void:
 func _on_area_3d_body_entered(body) -> void:
 	if body.is_in_group("caramel"):
 		print("touch")
-		get_tree().change_scene_to_file("res://lose_screen.tscn") # goes to lose screen if the enemy touches the player
+		get_tree().change_scene_to_file.call_deferred("res://lose_screen.tscn") # goes to lose screen if the enemy touches the player
 		Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 		
