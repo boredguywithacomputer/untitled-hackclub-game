@@ -31,7 +31,7 @@ func _spawn_leaf() -> void:
 		randf_range(ROAM_RECT.position.x, ROAM_RECT.end.x - LEAF_SIZE.x),
 		randf_range(ROAM_RECT.position.y, ROAM_RECT.end.y - LEAF_SIZE.y)
 	)
-	leaf.rotation = randf() * TAU
+	leaf.rotation = randf() * TAU # 2 pi, for the entire circle
 	leaf.set_meta("vel", Vector2.from_angle(randf() * TAU) * randf_range(MIN_V, MAX_V))
 	leaf.set_meta("spin", randf_range(-1.5, 1.5))
 	leaf.gui_input.connect(_on_leaf_gui_input.bind(leaf))
