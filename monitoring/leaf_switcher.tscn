@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b12dbvqqey51v"]
+
+[ext_resource type="Script" uid="uid://g0xjipjesklb" path="res://leaf_switcher.gd" id="1_2d8n3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2d8n3"]
+albedo_color = Color(0.9034093, 0.33440855, 0.57204294, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbih1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjt7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2dur"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[node name="leaf_switcher" type="MeshInstance3D" unique_id=729553167]
+material_override = SubResource("StandardMaterial3D_2d8n3")
+mesh = SubResource("BoxMesh_hbih1")
+script = ExtResource("1_2d8n3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=370923642]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=2131006299]
+shape = SubResource("BoxShape3D_cjt7s")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1076250164]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=233033689]
+shape = SubResource("BoxShape3D_e2dur")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

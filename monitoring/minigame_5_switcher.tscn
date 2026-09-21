@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dafsu48hctikt"]
+
+[ext_resource type="Script" uid="uid://b4aqf052fsgwt" path="res://minigame5_pressed.gd" id="1_5aqxe"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fqsby"]
+albedo_color = Color(0.9137255, 0.3882353, 0.40784314, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e2dur"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cjt7s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbih1"]
+size = Vector3(1.1, 1.1, 1.1)
+
+[node name="minigame5_switcher" type="MeshInstance3D" unique_id=1516376325]
+material_override = SubResource("StandardMaterial3D_fqsby")
+mesh = SubResource("BoxMesh_e2dur")
+script = ExtResource("1_5aqxe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=335201869]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1004172977]
+shape = SubResource("BoxShape3D_cjt7s")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1116285083]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1018375366]
+shape = SubResource("BoxShape3D_hbih1")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

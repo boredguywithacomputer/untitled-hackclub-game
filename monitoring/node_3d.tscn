@@ -6,7 +6,11 @@
 [ext_resource type="Script" uid="uid://qcorh6p4dxxh" path="res://camera_3d.gd" id="2_jka67"]
 [ext_resource type="PackedScene" uid="uid://dn1f4y7qb2wpj" path="res://monitor.tscn" id="3_a0tk4"]
 [ext_resource type="PackedScene" uid="uid://dqan64k4qtamq" path="res://thewall.tscn" id="3_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://dksee5p8v3qak" path="res://wire_switcher.tscn" id="7_jsk3o"]
 [ext_resource type="Script" uid="uid://dfgmubbbb2vmx" path="res://minigame_holder.gd" id="7_wc5p8"]
+[ext_resource type="PackedScene" uid="uid://b12dbvqqey51v" path="res://leaf_switcher.tscn" id="8_4arys"]
+[ext_resource type="PackedScene" uid="uid://j6435iy23x2y" path="res://divert_switcher.tscn" id="9_6iypd"]
+[ext_resource type="PackedScene" uid="uid://dafsu48hctikt" path="res://minigame_5_switcher.tscn" id="10_tereu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cjt7s"]
 
@@ -155,6 +159,18 @@ transform = Transform3D(-0.07414855, -0.99426967, 0.07702465, 0.99080217, -0.082
 
 [node name="switcher" parent="." unique_id=1180401452 instance=ExtResource("1_jka67")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5280092, -11.179098)
+
+[node name="wire_switcher" parent="." unique_id=981535756 instance=ExtResource("7_jsk3o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.607463, 0.8064885, -1.9409351)
+
+[node name="leaf_switcher" parent="." unique_id=729553167 instance=ExtResource("8_4arys")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.702768, 0.666594, 3.8353157)
+
+[node name="divert_switcher" parent="." unique_id=2059688433 instance=ExtResource("9_6iypd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.72594595, 7)
+
+[node name="minigame5_switcher" parent="." unique_id=1516376325 instance=ExtResource("10_tereu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.035016, 0.565675, 13.275719)
 
 [node name="minigame_holder" type="Node2D" parent="." unique_id=1059559320]
 script = ExtResource("7_wc5p8")
