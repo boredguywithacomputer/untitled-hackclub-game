@@ -11,6 +11,10 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_area_3d_body_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(body: Node3D) -> void: # switches to the repeat minigame if the button is pressed
 	if body.is_in_group("caramel"):
 		print("game5 pressed")
+		if globalvars.switch5state == "on":
+			globalvars.container.add_child(globalvars.repeat)
+			globalvars.maingame.visible = false
+			globalvars.maingame.set_process_mode.call_deferred(Node.PROCESS_MODE_DISABLED)

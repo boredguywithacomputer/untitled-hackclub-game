@@ -147,6 +147,7 @@ func _snap(a: ColorRect, b: ColorRect) -> void:
 func _on_completed() -> void:
 	completed.emit()
 	print("successful completion")
+	globalvars.wiresDone = "yes" # marks that the wires are done in the global variable so it knows to go back to the main game
 	await get_tree().create_timer(1.6).timeout
 	close()
 	

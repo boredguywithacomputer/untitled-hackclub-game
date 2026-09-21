@@ -145,6 +145,7 @@ func _on_completed() -> void:
 	completed.emit()
 	await get_tree().create_timer(1.6).timeout
 	print("successful completion")
+	globalvars.filterDone = "yes"
 	close()
 
 func close() -> void:

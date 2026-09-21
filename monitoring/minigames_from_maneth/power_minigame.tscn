@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bddg0dskqtti6"]
 
-[ext_resource type="Script" uid="uid://cdh4ym4fknuf" path="res://power_minigame.gd" id="1_ousdp"]
+[ext_resource type="Script" uid="uid://cdh4ym4fknuf" path="res://minigames_from_maneth/power_minigame.gd" id="1_ousdp"]
+[ext_resource type="Script" uid="uid://s5cwxr47e25l" path="res://minigames_from_maneth/power.gd" id="2_jmq01"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ousdp"]
 content_margin_left = 48.0
@@ -19,6 +20,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_jmq01")
 
 [node name="Dim" type="ColorRect" parent="Root" unique_id=592711254]
 layout_mode = 1

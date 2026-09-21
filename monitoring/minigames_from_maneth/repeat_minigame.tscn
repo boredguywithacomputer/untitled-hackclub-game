@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bdbswjmnli37e"]
 
-[ext_resource type="Script" uid="uid://cd3b1sv5p6sub" path="res://repeat_minigame.gd" id="1_duypc"]
+[ext_resource type="Script" uid="uid://cd3b1sv5p6sub" path="res://minigames_from_maneth/repeat_minigame.gd" id="1_duypc"]
+[ext_resource type="Script" uid="uid://rdocr6yytl56" path="res://minigames_from_maneth/repeat.gd" id="2_76xwu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ousdp"]
 content_margin_left = 48.0
@@ -33,6 +34,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("2_76xwu")
 
 [node name="Dim" type="ColorRect" parent="Root" unique_id=592711254]
 layout_mode = 1

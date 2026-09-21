@@ -132,6 +132,7 @@ func _lock_in(lane: Lane) -> void:
 func _on_completed() -> void:
 	completed.emit()
 	print("successful completion")
+	globalvars.powerDone = "yes"
 	await get_tree().create_timer(1.6).timeout
 	close()
 	
